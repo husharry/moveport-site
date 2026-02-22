@@ -1,120 +1,169 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Moveport | AI Destekli Vardiya Planlama</title>
-  <meta name="description" content="Moveport, AI destekli vardiya planlama yazılımıdır. Operasyonel karmaşayı azaltır, planlamayı optimize eder." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: #f8fafc;
-      line-height: 1.6;
-    }
-    header {
-      padding: 40px 20px;
-      text-align: center;
-    }
-    header h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      background: linear-gradient(90deg, #38bdf8, #818cf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    header p {
-      margin-top: 20px;
-      font-size: 1.2rem;
-      color: #cbd5e1;
-    }
-    section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-    .card {
-      background: #1e293b;
-      padding: 30px;
-      border-radius: 12px;
-      transition: 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      background: #273449;
-    }
-    .card h3 {
-      margin-bottom: 15px;
-      color: #38bdf8;
-    }
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      border-top: 1px solid #334155;
-      color: #94a3b8;
-    }
-    a {
-      color: #38bdf8;
-      text-decoration: none;
-    }
-    @media (max-width: 768px) {
-      header h1 { font-size: 2.2rem; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Moveport | Yapay Zekâ Destekli İş Gücü Yönetimi</title>
+<meta name="description" content="Moveport, yapay zekâ destekli iş gücü yönetimi, vardiya optimizasyonu ve otomatik görev atama platformudur." />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+* {margin:0;padding:0;box-sizing:border-box}
+body {
+  font-family:'Inter',sans-serif;
+  background:#0f172a;
+  color:#f1f5f9;
+  line-height:1.6;
+}
+section {padding:80px 20px;max-width:1100px;margin:auto}
+h1,h2,h3 {font-weight:700}
+.hero {
+  text-align:center;
+  padding:120px 20px;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+}
+.hero h1 {
+  font-size:3rem;
+  background:linear-gradient(90deg,#38bdf8,#818cf8);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero p {
+  margin-top:20px;
+  font-size:1.2rem;
+  color:#cbd5e1;
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+  margin-top:40px;
+}
+.card {
+  background:#1e293b;
+  padding:30px;
+  border-radius:14px;
+  transition:0.3s;
+}
+.card:hover {
+  transform:translateY(-6px);
+  background:#273449;
+}
+.card h3 {color:#38bdf8;margin-bottom:15px}
+.stats {
+  display:flex;
+  flex-wrap:wrap;
+  gap:40px;
+  justify-content:center;
+  margin-top:40px;
+}
+.stat {
+  text-align:center;
+}
+.stat h3 {
+  font-size:2rem;
+  color:#38bdf8;
+}
+.footer {
+  text-align:center;
+  padding:40px 20px;
+  border-top:1px solid #334155;
+  color:#94a3b8;
+}
+a {color:#38bdf8;text-decoration:none}
+@media(max-width:768px){
+.hero h1{font-size:2.2rem}
+}
+</style>
 </head>
 <body>
 
-<header>
+<div class="hero">
   <h1>Moveport</h1>
-  <p>AI Destekli Vardiya Planlama Yazılımı</p>
-</header>
+  <p>Yapay Zekâ Destekli İş Gücü Yönetimi, Vardiya Optimizasyonu ve Otomatik Görev Atama Platformu</p>
+</div>
 
 <section>
-  <h2>Moveport Nedir?</h2>
-  <p>
-    Moveport, işletmeler için geliştirilmiş AI destekli vardiya planlama çözümüdür.
-    Operasyonel karmaşayı azaltır, manuel planlamayı ortadan kaldırır ve
-    insan hatasını minimize eder.
-  </p>
-
-  <div class="card-container">
+  <h2>Mevcut İş Gücü Yönetimi Neden Yetersiz?</h2>
+  <div class="grid">
     <div class="card">
-      <h3>Akıllı Planlama</h3>
-      <p>Personel uygunluklarını ve iş yükünü analiz ederek optimize edilmiş vardiyalar oluşturur.</p>
+      <h3>Manuel Planlama</h3>
+      <p>Excel ve insan bağımlı süreçler hatalara ve zaman kaybına yol açar.</p>
     </div>
-
     <div class="card">
-      <h3>Operasyonel Verimlilik</h3>
-      <p>Fazla mesaiyi ve çakışmaları azaltarak maliyet kontrolü sağlar.</p>
+      <h3>Yüksek Fazla Mesai</h3>
+      <p>Öngörülemeyen vardiyalar maliyet artışına neden olur.</p>
     </div>
-
     <div class="card">
-      <h3>Şeffaf Yönetim</h3>
-      <p>Yöneticilere net raporlar ve planlama görünürlüğü sunar.</p>
+      <h3>Dağınık Veri</h3>
+      <p>HR ve operasyon verilerinin ayrı sistemlerde olması görünürlüğü azaltır.</p>
     </div>
   </div>
 </section>
 
 <section>
+  <h2>Akıllı İş Gücü Optimizasyonu</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>AI Destekli Görev Atama</h3>
+      <p>Görev + HR + performans verisini birlikte analiz eder.</p>
+    </div>
+    <div class="card">
+      <h3>Gerçek Zamanlı Vardiya Optimizasyonu</h3>
+      <p>İş yükü ve çalışan uygunluklarını saniyeler içinde dengeler.</p>
+    </div>
+    <div class="card">
+      <h3>İnsan Merkezli AI</h3>
+      <p>Yorgunluk, performans ve adil dağılım kriterlerini dikkate alır.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Ölçülebilir Operasyonel Etki</h2>
+  <div class="stats">
+    <div class="stat">
+      <h3>%15–30</h3>
+      <p>Verimlilik Artışı</p>
+    </div>
+    <div class="stat">
+      <h3>%20</h3>
+      <p>Fazla Mesai Azalması</p>
+    </div>
+    <div class="stat">
+      <h3>%20–40</h3>
+      <p>Planlama Hatası İyileşmesi</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Hedef Pazar</h2>
+  <p>
+    Türkiye’de lojistik ve operasyon yoğun sektörler,
+    MENA bölgesinde dağıtım ve depo operasyonları,
+    EMEA’da çok lokasyonlu kurumsal yapılar için tasarlanmıştır.
+  </p>
+</section>
+
+<section>
+  <h2>Gelecek Perspektifi</h2>
+  <p>
+    Moveport, insan merkezli yapay zekâ yaklaşımıyla iş gücü yönetimini veriyle yöneten,
+    ölçeklenebilir ve sürdürülebilir bir SaaS platformu olmayı hedeflemektedir.
+  </p>
+</section>
+
+<section style="text-align:center;">
   <h2>İletişim</h2>
   <p>
-    Daha fazla bilgi için bizimle iletişime geçin:
-    <br /><br />
+    Daha fazla bilgi için:<br><br>
     <strong><a href="mailto:info@moveport.net">info@moveport.net</a></strong>
   </p>
 </section>
 
-<footer>
+<div class="footer">
   © 2026 Moveport. Tüm hakları saklıdır.
-</footer>
+</div>
 
 </body>
 </html>
