@@ -4,161 +4,164 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Moveport | Yapay Zekâ Destekli İş Gücü Yönetimi</title>
-<meta name="description" content="Moveport, yapay zekâ destekli iş gücü yönetimi, vardiya optimizasyonu ve otomatik görev atama platformudur." />
+<meta name="description" content="Moveport, yapay zekâ destekli iş gücü yönetimi platformudur." />
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-* {margin:0;padding:0;box-sizing:border-box}
-body {
+:root{
+  --bg-primary:#0B1120;
+  --bg-secondary:#111827;
+  --accent:#3B82F6;
+  --accent-gradient:linear-gradient(135deg,#3B82F6,#8B5CF6);
+  --text-light:#E5E7EB;
+  --text-muted:#9CA3AF;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{
   font-family:'Inter',sans-serif;
-  background:#0f172a;
-  color:#f1f5f9;
+  background:var(--bg-primary);
+  color:var(--text-light);
   line-height:1.6;
 }
-section {padding:80px 20px;max-width:1100px;margin:auto}
-h1,h2,h3 {font-weight:700}
-.hero {
+
+/* Animated Background */
+.hero{
+  position:relative;
   text-align:center;
-  padding:120px 20px;
-  background:linear-gradient(135deg,#0f172a,#1e293b);
+  padding:160px 20px;
+  overflow:hidden;
 }
-.hero h1 {
+.hero::before{
+  content:'';
+  position:absolute;
+  width:600px;
+  height:600px;
+  background:var(--accent-gradient);
+  filter:blur(180px);
+  top:-200px;
+  left:50%;
+  transform:translateX(-50%);
+  animation:float 8s ease-in-out infinite alternate;
+  opacity:0.5;
+}
+@keyframes float{
+  from{transform:translateX(-50%) translateY(-20px)}
+  to{transform:translateX(-50%) translateY(40px)}
+}
+
+.hero h1{
   font-size:3rem;
-  background:linear-gradient(90deg,#38bdf8,#818cf8);
+  background:var(--accent-gradient);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  animation:fadeIn 1.5s ease forwards;
 }
-.hero p {
+.hero p{
   margin-top:20px;
   font-size:1.2rem;
-  color:#cbd5e1;
+  color:var(--text-muted);
+  animation:fadeIn 2s ease forwards;
 }
-.grid {
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.cta-btn{
+  display:inline-block;
+  margin-top:40px;
+  padding:14px 30px;
+  border-radius:40px;
+  background:var(--accent-gradient);
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  transition:0.3s;
+}
+.cta-btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 25px rgba(59,130,246,0.6);
+}
+
+section{
+  padding:100px 20px;
+  max-width:1100px;
+  margin:auto;
+}
+
+h2{
+  font-size:2rem;
+  margin-bottom:40px;
+  text-align:center;
+}
+
+.grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:30px;
-  margin-top:40px;
 }
-.card {
-  background:#1e293b;
+
+.card{
+  background:var(--bg-secondary);
   padding:30px;
-  border-radius:14px;
+  border-radius:16px;
   transition:0.3s;
 }
-.card:hover {
-  transform:translateY(-6px);
-  background:#273449;
+.card:hover{
+  transform:translateY(-8px);
+  background:#1F2937;
 }
-.card h3 {color:#38bdf8;margin-bottom:15px}
-.stats {
-  display:flex;
-  flex-wrap:wrap;
-  gap:40px;
-  justify-content:center;
-  margin-top:40px;
+.card h3{
+  margin-bottom:15px;
+  color:var(--accent);
 }
-.stat {
-  text-align:center;
-}
-.stat h3 {
-  font-size:2rem;
-  color:#38bdf8;
-}
-.footer {
+
+.footer{
   text-align:center;
   padding:40px 20px;
-  border-top:1px solid #334155;
-  color:#94a3b8;
+  border-top:1px solid #1F2937;
+  color:var(--text-muted);
 }
-a {color:#38bdf8;text-decoration:none}
+
 @media(max-width:768px){
 .hero h1{font-size:2.2rem}
 }
 </style>
 </head>
+
 <body>
 
 <div class="hero">
   <h1>Moveport</h1>
-  <p>Yapay Zekâ Destekli İş Gücü Yönetimi, Vardiya Optimizasyonu ve Otomatik Görev Atama Platformu</p>
+  <p>Yapay Zekâ Destekli İş Gücü Yönetimi Platformu</p>
+  <a href="#iletisim" class="cta-btn">İletişime Geç</a>
 </div>
-
-<section>
-  <h2>Mevcut İş Gücü Yönetimi Neden Yetersiz?</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Manuel Planlama</h3>
-      <p>Excel ve insan bağımlı süreçler hatalara ve zaman kaybına yol açar.</p>
-    </div>
-    <div class="card">
-      <h3>Yüksek Fazla Mesai</h3>
-      <p>Öngörülemeyen vardiyalar maliyet artışına neden olur.</p>
-    </div>
-    <div class="card">
-      <h3>Dağınık Veri</h3>
-      <p>HR ve operasyon verilerinin ayrı sistemlerde olması görünürlüğü azaltır.</p>
-    </div>
-  </div>
-</section>
 
 <section>
   <h2>Akıllı İş Gücü Optimizasyonu</h2>
   <div class="grid">
     <div class="card">
-      <h3>AI Destekli Görev Atama</h3>
-      <p>Görev + HR + performans verisini birlikte analiz eder.</p>
+      <h3>AI Görev Atama</h3>
+      <p>Görev, performans ve HR verilerini birlikte analiz eder.</p>
     </div>
     <div class="card">
-      <h3>Gerçek Zamanlı Vardiya Optimizasyonu</h3>
-      <p>İş yükü ve çalışan uygunluklarını saniyeler içinde dengeler.</p>
+      <h3>Gerçek Zamanlı Planlama</h3>
+      <p>Vardiyaları saniyeler içinde optimize eder.</p>
     </div>
     <div class="card">
       <h3>İnsan Merkezli AI</h3>
-      <p>Yorgunluk, performans ve adil dağılım kriterlerini dikkate alır.</p>
+      <p>Adil ve sürdürülebilir iş gücü dağılımı sağlar.</p>
     </div>
   </div>
 </section>
 
-<section>
-  <h2>Ölçülebilir Operasyonel Etki</h2>
-  <div class="stats">
-    <div class="stat">
-      <h3>%15–30</h3>
-      <p>Verimlilik Artışı</p>
-    </div>
-    <div class="stat">
-      <h3>%20</h3>
-      <p>Fazla Mesai Azalması</p>
-    </div>
-    <div class="stat">
-      <h3>%20–40</h3>
-      <p>Planlama Hatası İyileşmesi</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2>Hedef Pazar</h2>
-  <p>
-    Türkiye’de lojistik ve operasyon yoğun sektörler,
-    MENA bölgesinde dağıtım ve depo operasyonları,
-    EMEA’da çok lokasyonlu kurumsal yapılar için tasarlanmıştır.
-  </p>
-</section>
-
-<section>
-  <h2>Gelecek Perspektifi</h2>
-  <p>
-    Moveport, insan merkezli yapay zekâ yaklaşımıyla iş gücü yönetimini veriyle yöneten,
-    ölçeklenebilir ve sürdürülebilir bir SaaS platformu olmayı hedeflemektedir.
-  </p>
-</section>
-
-<section style="text-align:center;">
+<section id="iletisim" style="text-align:center;">
   <h2>İletişim</h2>
-  <p>
-    Daha fazla bilgi için:<br><br>
-    <strong><a href="mailto:info@moveport.net">info@moveport.net</a></strong>
-  </p>
+  <p>Daha fazla bilgi için:</p>
+  <br>
+  <a href="mailto:info@moveport.net" class="cta-btn">info@moveport.net</a>
 </section>
 
 <div class="footer">
