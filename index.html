@@ -4,168 +4,208 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Moveport | Yapay Zekâ Destekli İş Gücü Yönetimi</title>
-<meta name="description" content="Moveport, yapay zekâ destekli iş gücü yönetimi platformudur." />
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg-primary:#0B1120;
-  --bg-secondary:#111827;
-  --accent:#3B82F6;
-  --accent-gradient:linear-gradient(135deg,#3B82F6,#8B5CF6);
-  --text-light:#E5E7EB;
-  --text-muted:#9CA3AF;
+  --primary:#3FA4D8;
+  --primary-dark:#2C8FC1;
+  --navy:#0E1A2B;
+  --navy-light:#142338;
+  --text:#F5F7FA;
+  --text-muted:#A9B4C2;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+*{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:'Inter',sans-serif;
-  background:var(--bg-primary);
-  color:var(--text-light);
+  background:var(--navy);
+  color:var(--text);
   line-height:1.6;
 }
 
-/* Animated Background */
-.hero{
-  position:relative;
-  text-align:center;
-  padding:160px 20px;
-  overflow:hidden;
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:25px 60px;
+  background:transparent;
 }
-.hero::before{
-  content:'';
-  position:absolute;
-  width:600px;
-  height:600px;
-  background:var(--accent-gradient);
-  filter:blur(180px);
-  top:-200px;
-  left:50%;
-  transform:translateX(-50%);
-  animation:float 8s ease-in-out infinite alternate;
-  opacity:0.5;
+.logo{
+  height:50px;
 }
-@keyframes float{
-  from{transform:translateX(-50%) translateY(-20px)}
-  to{transform:translateX(-50%) translateY(40px)}
+.nav-btn{
+  padding:10px 22px;
+  border:1px solid var(--primary);
+  border-radius:30px;
+  text-decoration:none;
+  color:var(--primary);
+  transition:0.3s;
+}
+.nav-btn:hover{
+  background:var(--primary);
+  color:white;
 }
 
+/* HERO */
+.hero{
+  text-align:center;
+  padding:140px 20px 120px 20px;
+  background:linear-gradient(180deg,var(--navy) 0%, var(--navy-light) 100%);
+}
 .hero h1{
-  font-size:3rem;
-  background:var(--accent-gradient);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:fadeIn 1.5s ease forwards;
+  font-size:3.2rem;
+  font-weight:700;
+  margin-bottom:20px;
+}
+.hero span{
+  color:var(--primary);
 }
 .hero p{
-  margin-top:20px;
-  font-size:1.2rem;
+  font-size:1.25rem;
   color:var(--text-muted);
-  animation:fadeIn 2s ease forwards;
+  max-width:800px;
+  margin:auto;
 }
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-.cta-btn{
+.cta{
   display:inline-block;
   margin-top:40px;
-  padding:14px 30px;
-  border-radius:40px;
-  background:var(--accent-gradient);
+  padding:16px 34px;
+  background:var(--primary);
   color:white;
+  border-radius:40px;
   text-decoration:none;
   font-weight:600;
   transition:0.3s;
 }
-.cta-btn:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 25px rgba(59,130,246,0.6);
+.cta:hover{
+  background:var(--primary-dark);
+  transform:translateY(-3px);
 }
 
+/* SECTIONS */
 section{
-  padding:100px 20px;
-  max-width:1100px;
+  padding:100px 60px;
+  max-width:1200px;
   margin:auto;
 }
-
 h2{
-  font-size:2rem;
-  margin-bottom:40px;
+  font-size:2.2rem;
+  margin-bottom:50px;
   text-align:center;
 }
-
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:40px;
 }
-
 .card{
-  background:var(--bg-secondary);
-  padding:30px;
-  border-radius:16px;
+  background:var(--navy-light);
+  padding:40px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.05);
   transition:0.3s;
 }
 .card:hover{
-  transform:translateY(-8px);
-  background:#1F2937;
+  border:1px solid var(--primary);
+  transform:translateY(-5px);
 }
 .card h3{
   margin-bottom:15px;
-  color:var(--accent);
+  color:var(--primary);
 }
-
-.footer{
+.stats{
+  display:flex;
+  justify-content:center;
+  gap:80px;
+  flex-wrap:wrap;
+}
+.stat{
   text-align:center;
-  padding:40px 20px;
-  border-top:1px solid #1F2937;
+}
+.stat h3{
+  font-size:2.5rem;
+  color:var(--primary);
+}
+.footer{
+  padding:50px;
+  text-align:center;
+  background:var(--navy-light);
   color:var(--text-muted);
+  margin-top:80px;
 }
 
 @media(max-width:768px){
-.hero h1{font-size:2.2rem}
+  header{padding:20px}
+  section{padding:80px 20px}
+  .hero h1{font-size:2.2rem}
 }
 </style>
 </head>
 
 <body>
 
+<header>
+  <img src="logo.png" alt="Moveport Logo" class="logo">
+  <a href="#iletisim" class="nav-btn">İletişim</a>
+</header>
+
 <div class="hero">
-  <h1>Moveport</h1>
-  <p>Yapay Zekâ Destekli İş Gücü Yönetimi Platformu</p>
-  <a href="#iletisim" class="cta-btn">İletişime Geç</a>
+  <h1>Yapay Zekâ Destekli <span>İş Gücü Yönetimi</span></h1>
+  <p>
+    Moveport, vardiya optimizasyonu, otomatik görev atama ve operasyonel karar desteği sunan
+    kurumsal seviye bir iş gücü yönetim platformudur.
+  </p>
+  <a href="#iletisim" class="cta">Bizimle İletişime Geçin</a>
 </div>
 
 <section>
-  <h2>Akıllı İş Gücü Optimizasyonu</h2>
+  <h2>Kurumsal Zorluklar</h2>
   <div class="grid">
     <div class="card">
-      <h3>AI Görev Atama</h3>
-      <p>Görev, performans ve HR verilerini birlikte analiz eder.</p>
+      <h3>Manuel Planlama</h3>
+      <p>Excel ve insan bağımlı süreçler operasyonel hatalara yol açar.</p>
     </div>
     <div class="card">
-      <h3>Gerçek Zamanlı Planlama</h3>
-      <p>Vardiyaları saniyeler içinde optimize eder.</p>
+      <h3>Yüksek Fazla Mesai</h3>
+      <p>Dengesiz vardiyalar maliyetleri artırır.</p>
     </div>
     <div class="card">
-      <h3>İnsan Merkezli AI</h3>
-      <p>Adil ve sürdürülebilir iş gücü dağılımı sağlar.</p>
+      <h3>Dağınık Veri Yapısı</h3>
+      <p>HR ve operasyon sistemlerinin entegrasyon eksikliği görünürlüğü azaltır.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Moveport Etkisi</h2>
+  <div class="stats">
+    <div class="stat">
+      <h3>%15–30</h3>
+      <p>Verimlilik Artışı</p>
+    </div>
+    <div class="stat">
+      <h3>%20</h3>
+      <p>Fazla Mesai Azalması</p>
+    </div>
+    <div class="stat">
+      <h3>%20–40</h3>
+      <p>Planlama Hatası İyileşmesi</p>
     </div>
   </div>
 </section>
 
 <section id="iletisim" style="text-align:center;">
   <h2>İletişim</h2>
-  <p>Daha fazla bilgi için:</p>
+  <p>Kurumsal iş birliği ve demo talepleri için:</p>
   <br>
-  <a href="mailto:info@moveport.net" class="cta-btn">info@moveport.net</a>
+  <a href="mailto:info@moveport.net" class="cta">info@moveport.net</a>
 </section>
 
 <div class="footer">
-  © 2026 Moveport. Tüm hakları saklıdır.
+  © 2026 Moveport | Enterprise Workforce Intelligence
 </div>
 
 </body>
