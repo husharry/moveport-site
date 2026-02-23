@@ -1,212 +1,664 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Moveport | Yapay Zekâ Destekli İş Gücü Yönetimi</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moveport — AI Destekli İş Gücü Yönetimi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    :root {
+      --cyan:       #29B6F6;
+      --cyan-mid:   #4FC3F7;
+      --cyan-pale:  #B3E5FC;
+      --cyan-ghost: #E1F5FE;
+      --white:      #FFFFFF;
+      --ink:        #0D2233;
+      --text:       #2E5470;
+      --muted:      #7AAEC8;
+      --border:     #C9E8F5;
+      --surface:    #F4FBFF;
+    }
 
-<style>
-:root{
-  --primary:#3FA4D8;
-  --primary-dark:#2C8FC1;
-  --navy:#0E1A2B;
-  --navy-light:#142338;
-  --text:#F5F7FA;
-  --text-muted:#A9B4C2;
-}
+    html { scroll-behavior: smooth; }
 
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:'Inter',sans-serif;
-  background:var(--navy);
-  color:var(--text);
-  line-height:1.6;
-}
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
 
-/* HEADER */
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:25px 60px;
-  background:transparent;
-}
-.logo{
-  height:50px;
-}
-.nav-btn{
-  padding:10px 22px;
-  border:1px solid var(--primary);
-  border-radius:30px;
-  text-decoration:none;
-  color:var(--primary);
-  transition:0.3s;
-}
-.nav-btn:hover{
-  background:var(--primary);
-  color:white;
-}
+    /* ── NAV ───────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 64px; height: 64px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
 
-/* HERO */
-.hero{
-  text-align:center;
-  padding:140px 20px 120px 20px;
-  background:linear-gradient(180deg,var(--navy) 0%, var(--navy-light) 100%);
-}
-.hero h1{
-  font-size:3.2rem;
-  font-weight:700;
-  margin-bottom:20px;
-}
-.hero span{
-  color:var(--primary);
-}
-.hero p{
-  font-size:1.25rem;
-  color:var(--text-muted);
-  max-width:800px;
-  margin:auto;
-}
-.cta{
-  display:inline-block;
-  margin-top:40px;
-  padding:16px 34px;
-  background:var(--primary);
-  color:white;
-  border-radius:40px;
-  text-decoration:none;
-  font-weight:600;
-  transition:0.3s;
-}
-.cta:hover{
-  background:var(--primary-dark);
-  transform:translateY(-3px);
-}
+    .logo { display: flex; align-items: center; gap: 9px; text-decoration: none; }
 
-/* SECTIONS */
-section{
-  padding:100px 60px;
-  max-width:1200px;
-  margin:auto;
-}
-h2{
-  font-size:2.2rem;
-  margin-bottom:50px;
-  text-align:center;
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:40px;
-}
-.card{
-  background:var(--navy-light);
-  padding:40px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,0.05);
-  transition:0.3s;
-}
-.card:hover{
-  border:1px solid var(--primary);
-  transform:translateY(-5px);
-}
-.card h3{
-  margin-bottom:15px;
-  color:var(--primary);
-}
-.stats{
-  display:flex;
-  justify-content:center;
-  gap:80px;
-  flex-wrap:wrap;
-}
-.stat{
-  text-align:center;
-}
-.stat h3{
-  font-size:2.5rem;
-  color:var(--primary);
-}
-.footer{
-  padding:50px;
-  text-align:center;
-  background:var(--navy-light);
-  color:var(--text-muted);
-  margin-top:80px;
-}
+    .logo-mark {
+      width: 30px; height: 30px;
+      background: var(--cyan); border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-mark svg { width: 17px; height: 17px; }
 
-@media(max-width:768px){
-  header{padding:20px}
-  section{padding:80px 20px}
-  .hero h1{font-size:2.2rem}
-}
-</style>
+    .logo-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700; font-size: 1.1rem;
+      color: var(--ink); letter-spacing: 0.05em;
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 400;
+      color: var(--text); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-contact { color: var(--cyan) !important; font-weight: 500 !important; }
+
+    /* ── HERO ──────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 64px 80px;
+      position: relative; overflow: hidden;
+    }
+
+    .hero-panel {
+      position: absolute; top: 0; right: 0; bottom: 0; width: 40%;
+      background: var(--cyan-ghost);
+      clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 600px; }
+
+    .eyebrow {
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 22px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .eyebrow::before { content:''; width:24px; height:1.5px; background:var(--cyan); }
+
+    h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2.6rem, 4.8vw, 3.8rem);
+      font-weight: 800; line-height: 1.08;
+      letter-spacing: -0.03em; color: var(--ink);
+      margin-bottom: 22px;
+    }
+    h1 em { font-style: normal; color: var(--cyan); }
+
+    .hero-desc {
+      font-size: 1rem; line-height: 1.75;
+      color: var(--text); font-weight: 300; max-width: 460px;
+    }
+
+    .hero-stats {
+      position: absolute; right: 64px; top: 50%;
+      transform: translateY(-50%); z-index: 2;
+      display: flex; flex-direction: column; gap: 1px; width: 210px;
+    }
+
+    .stat {
+      padding: 22px 26px; background: var(--white);
+      border: 1px solid var(--border);
+    }
+    .stat:first-child { border-radius: 11px 11px 0 0; }
+    .stat:last-child  { border-radius: 0 0 11px 11px; }
+
+    .stat-n {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2rem; font-weight: 800;
+      color: var(--cyan); line-height: 1; margin-bottom: 4px;
+    }
+    .stat-l { font-size: 0.73rem; color: var(--muted); line-height: 1.45; }
+
+    /* ── SHARED ────────────────────────────────────── */
+    section { padding: 96px 64px; }
+
+    .tag {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 9px;
+    }
+    .tag::before { content:''; width:18px; height:1.5px; background:var(--cyan); }
+
+    .sh {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.65rem, 2.8vw, 2.3rem);
+      font-weight: 700; line-height: 1.16;
+      letter-spacing: -0.02em; color: var(--ink); margin-bottom: 13px;
+    }
+
+    .ss {
+      font-size: 0.93rem; line-height: 1.75;
+      color: var(--text); font-weight: 300; max-width: 460px;
+    }
+
+    /* ── PROBLEM ───────────────────────────────────── */
+    .problem { background: var(--surface); }
+
+    .problem-wrap {
+      max-width: 1060px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: start;
+    }
+
+    .pain-list {
+      list-style: none; margin-top: 34px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+
+    .pain-item {
+      display: flex; align-items: flex-start; gap: 13px;
+      padding: 15px 17px; background: var(--white);
+      border: 1px solid var(--border); border-radius: 9px;
+      transition: border-color 0.22s;
+    }
+    .pain-item:hover { border-color: var(--cyan-mid); }
+
+    .pain-ico {
+      flex-shrink: 0; width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--cyan); margin-top: 1px;
+    }
+    .pain-ico svg { width: 15px; height: 15px; }
+
+    .pain-t { font-size: 0.86rem; color: var(--text); line-height: 1.55; }
+
+    .sol-block {
+      background: var(--cyan); border-radius: 14px; padding: 38px 34px;
+    }
+    .sol-block .sh { color: var(--white); }
+    .sol-block .ss { color: rgba(255,255,255,0.75); max-width:100%; }
+    .sol-block .tag { color: rgba(255,255,255,0.6); }
+    .sol-block .tag::before { background: rgba(255,255,255,0.4); }
+
+    .sol-list {
+      list-style: none; margin-top: 26px;
+      display: flex; flex-direction: column; gap: 11px;
+    }
+    .sol-item { display: flex; align-items: center; gap: 11px; font-size: 0.88rem; color: rgba(255,255,255,0.9); }
+
+    .sol-check {
+      flex-shrink: 0; width: 19px; height: 19px;
+      border-radius: 50%; background: rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sol-check svg { width: 9px; height: 9px; }
+
+    /* ── FEATURES ──────────────────────────────────── */
+    .features-wrap { max-width: 1060px; margin: 0 auto; }
+    .feat-header { margin-bottom: 48px; }
+
+    .feat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+
+    .fc {
+      padding: 26px 22px; border: 1px solid var(--border);
+      border-radius: 11px; background: var(--white); transition: all 0.22s;
+    }
+    .fc:hover {
+      border-color: var(--cyan-mid);
+      box-shadow: 0 4px 20px rgba(41,182,246,0.07);
+      transform: translateY(-2px);
+    }
+
+    .fc-icon {
+      width: 36px; height: 36px; background: var(--cyan-ghost);
+      border-radius: 8px; display: flex; align-items: center;
+      justify-content: center; margin-bottom: 16px; color: var(--cyan);
+    }
+    .fc-icon svg { width: 17px; height: 17px; }
+
+    .fc-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.95rem; font-weight: 600; color: var(--ink); margin-bottom: 7px;
+    }
+    .fc-desc { font-size: 0.81rem; color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+    /* ── IMPACT ────────────────────────────────────── */
+    .impact { background: var(--surface); }
+    .impact-wrap { max-width: 1060px; margin: 0 auto; }
+
+    .metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 48px; }
+
+    .metric {
+      padding: 36px 30px; background: var(--white);
+      border: 1px solid var(--border); border-radius: 11px;
+    }
+
+    .metric-n {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2.8rem; font-weight: 800;
+      color: var(--cyan); line-height: 1; margin-bottom: 9px;
+    }
+    .metric-l { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+    .extras { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
+
+    .extra-tag {
+      padding: 6px 13px; border: 1px solid var(--border);
+      border-radius: 100px; font-size: 0.76rem; color: var(--text);
+    }
+
+    /* ── MARKETS ───────────────────────────────────── */
+    .markets-wrap {
+      max-width: 1060px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: start;
+    }
+
+    .bars { margin-top: 38px; display: flex; flex-direction: column; gap: 20px; }
+
+    .bar-head { display: flex; justify-content: space-between; margin-bottom: 7px; }
+    .bar-lbl { font-size: 0.82rem; color: var(--text); }
+    .bar-pct {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.9rem; font-weight: 700; color: var(--ink);
+    }
+    .bar-track { height: 4px; background: var(--cyan-ghost); border-radius: 2px; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--cyan); border-radius: 2px; }
+
+    .seg-cards { display: flex; flex-direction: column; gap: 10px; }
+
+    .seg {
+      padding: 18px 20px; border: 1px solid var(--border);
+      border-radius: 9px; background: var(--white); transition: border-color 0.22s;
+    }
+    .seg:hover { border-color: var(--cyan-mid); }
+
+    .seg-t {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.92rem; font-weight: 600; color: var(--ink); margin-bottom: 4px;
+    }
+    .seg-d { font-size: 0.78rem; color: var(--muted); line-height: 1.55; font-weight: 300; }
+
+    /* ── ROADMAP ───────────────────────────────────── */
+    .roadmap { background: var(--surface); }
+    .roadmap-wrap { max-width: 1060px; margin: 0 auto; }
+
+    .tl {
+      margin-top: 48px; display: grid; grid-template-columns: repeat(6,1fr);
+      position: relative;
+    }
+    .tl::before {
+      content: ''; position: absolute; top: 9px; left: 12px; right: 12px;
+      height: 1px; background: var(--border);
+    }
+
+    .tl-step { padding: 0 10px; padding-top: 30px; position: relative; }
+
+    .tl-dot {
+      position: absolute; top: 3px; left: 50%; transform: translateX(-50%);
+      width: 13px; height: 13px; border-radius: 50%;
+      background: var(--white); border: 2px solid var(--cyan);
+    }
+
+    .tl-mo {
+      font-size: 0.63rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 6px;
+    }
+    .tl-t {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 600; color: var(--ink); margin-bottom: 5px;
+    }
+    .tl-d { font-size: 0.73rem; color: var(--muted); line-height: 1.55; font-weight: 300; }
+
+    /* ── CONTACT ───────────────────────────────────── */
+    .contact-sec { background: var(--white); text-align: center; padding: 96px 64px; }
+    .contact-sec .tag { justify-content: center; }
+    .contact-sec .sh { max-width: 440px; margin: 0 auto 12px; }
+    .contact-sec .ss { margin: 0 auto 34px; text-align: center; }
+
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 26px; background: var(--ink); color: white;
+      border-radius: 8px; text-decoration: none;
+      font-size: 0.86rem; font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+    .contact-link:hover { background: var(--cyan); color: var(--ink); }
+    .contact-link svg { width: 13px; height: 13px; }
+
+    /* ── FOOTER ────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border); padding: 30px 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .foot-logo { display: flex; align-items: center; gap: 8px; }
+
+    .foot-mark {
+      width: 24px; height: 24px; background: var(--cyan);
+      border-radius: 5px; display: flex; align-items: center; justify-content: center;
+    }
+    .foot-mark svg { width: 13px; height: 13px; }
+
+    .foot-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700; font-size: 0.88rem; color: var(--ink); letter-spacing: 0.05em;
+    }
+    .foot-copy { font-size: 0.76rem; color: var(--muted); }
+
+    /* ── REVEAL ────────────────────────────────────── */
+    .r { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .r.on { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      section { padding: 64px 24px; }
+      .hero { padding: 100px 24px 64px; }
+      .hero-panel, .hero-stats { display: none; }
+      .problem-wrap, .markets-wrap { grid-template-columns: 1fr; gap: 32px; }
+      .feat-grid { grid-template-columns: 1fr 1fr; }
+      .metrics { grid-template-columns: 1fr; }
+      .tl { grid-template-columns: 1fr 1fr; }
+      .tl::before { display: none; }
+      .tl-step { padding-top: 0; padding-left: 24px; }
+      .tl-dot { top: 2px; left: 0; transform: none; }
+      footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px; }
+      .contact-sec { padding: 72px 24px; }
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-  <img src="logo.png" alt="Moveport Logo" class="logo">
-  <a href="#iletisim" class="nav-btn">İletişim</a>
-</header>
-
-<div class="hero">
-  <h1>Yapay Zekâ Destekli <span>İş Gücü Yönetimi</span></h1>
-  <p>
-    Moveport, vardiya optimizasyonu, otomatik görev atama ve operasyonel karar desteği sunan
-    kurumsal seviye bir iş gücü yönetim platformudur.
-  </p>
-  <a href="#iletisim" class="cta">Bizimle İletişime Geçin</a>
-</div>
-
-<section>
-  <h2>Kurumsal Zorluklar</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Manuel Planlama</h3>
-      <p>Excel ve insan bağımlı süreçler operasyonel hatalara yol açar.</p>
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 17 17" fill="none">
+        <path d="M2 12.5L5.5 6L8 9.5L10.5 6.5L15 12.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="15" cy="12.5" r="1.3" fill="white"/>
+        <circle cx="10.5" cy="6.5" r="1.3" fill="white"/>
+      </svg>
     </div>
-    <div class="card">
-      <h3>Yüksek Fazla Mesai</h3>
-      <p>Dengesiz vardiyalar maliyetleri artırır.</p>
+    <span class="logo-text">MOVEPORT</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#problem">Sorun</a></li>
+    <li><a href="#features">Özellikler</a></li>
+    <li><a href="#impact">Etki</a></li>
+    <li><a href="#markets">Pazar</a></li>
+    <li><a href="#roadmap">Yol Haritası</a></li>
+    <li><a href="#contact" class="nav-contact">İletişim →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-panel"></div>
+  <div class="hero-content">
+    <div class="eyebrow r">Yapay Zeka · SaaS · İş Gücü Yönetimi</div>
+    <h1 class="r">İş gücünüzü<br /><em>AI ile</em> yönetin.</h1>
+    <p class="hero-desc r">Vardiya planlama, görev atama ve çalışan verimlilik yönetimini otomatize eden kurumsal SaaS platformu. Excel ve manuel süreçlere son verin.</p>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-n">%30</div>
+      <div class="stat-l">Verimlilik<br/>artışı hedefi</div>
     </div>
-    <div class="card">
-      <h3>Dağınık Veri Yapısı</h3>
-      <p>HR ve operasyon sistemlerinin entegrasyon eksikliği görünürlüğü azaltır.</p>
+    <div class="stat">
+      <div class="stat-n">%20</div>
+      <div class="stat-l">Fazla mesai<br/>maliyet azalması</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">%40</div>
+      <div class="stat-l">Planlama hatası<br/>iyileşmesi</div>
     </div>
   </div>
 </section>
 
-<section>
-  <h2>Moveport Etkisi</h2>
-  <div class="stats">
-    <div class="stat">
-      <h3>%15–30</h3>
-      <p>Verimlilik Artışı</p>
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="problem-wrap">
+    <div>
+      <div class="tag r">Mevcut Durum</div>
+      <h2 class="sh r">Geleneksel yönetimin<br/>kırılgan yapısı</h2>
+      <p class="ss r">Dağınık veri ve manuel süreçler; hata, maliyet ve öngörülemezlik doğurur.</p>
+      <ul class="pain-list">
+        <li class="pain-item r">
+          <span class="pain-ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.5v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11" r="0.7" fill="currentColor"/></svg></span>
+          <span class="pain-t">Manuel vardiya planlama — yüksek hata ve çakışma riski</span>
+        </li>
+        <li class="pain-item r">
+          <span class="pain-ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.5v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11" r="0.7" fill="currentColor"/></svg></span>
+          <span class="pain-t">Kontrol edilemeyen fazla mesai maliyetleri</span>
+        </li>
+        <li class="pain-item r">
+          <span class="pain-ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.5v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11" r="0.7" fill="currentColor"/></svg></span>
+          <span class="pain-t">Çalışan yorgunluğu ve iş kazası riski</span>
+        </li>
+        <li class="pain-item r">
+          <span class="pain-ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.5v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11" r="0.7" fill="currentColor"/></svg></span>
+          <span class="pain-t">HR ve operasyon verisi dağınık, silolarda kilitli</span>
+        </li>
+        <li class="pain-item r">
+          <span class="pain-ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.5v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11" r="0.7" fill="currentColor"/></svg></span>
+          <span class="pain-t">Gerçek zamanlı görünürlük ve karar desteği yok</span>
+        </li>
+      </ul>
     </div>
-    <div class="stat">
-      <h3>%20</h3>
-      <p>Fazla Mesai Azalması</p>
-    </div>
-    <div class="stat">
-      <h3>%20–40</h3>
-      <p>Planlama Hatası İyileşmesi</p>
+    <div class="sol-block r">
+      <div class="tag">Moveport Yaklaşımı</div>
+      <h2 class="sh" style="margin-top:13px;">Akıllı iş gücü<br/>optimizasyonu</h2>
+      <p class="ss" style="font-size:0.86rem;margin-top:9px;">Daha güvenli, adil ve verimli bir operasyon modeli.</p>
+      <ul class="sol-list">
+        <li class="sol-item">
+          <span class="sol-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2L7.5 2" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          AI destekli otomatik görev atama
+        </li>
+        <li class="sol-item">
+          <span class="sol-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2L7.5 2" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Gerçek zamanlı vardiya optimizasyonu
+        </li>
+        <li class="sol-item">
+          <span class="sol-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2L7.5 2" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Çalışan performans ve yorgunluk analizi
+        </li>
+        <li class="sol-item">
+          <span class="sol-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2L7.5 2" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Tek panelden merkezi yönetim
+        </li>
+        <li class="sol-item">
+          <span class="sol-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2L7.5 2" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          HRM / ERP entegrasyonu
+        </li>
+      </ul>
     </div>
   </div>
 </section>
 
-<section id="iletisim" style="text-align:center;">
-  <h2>İletişim</h2>
-  <p>Kurumsal iş birliği ve demo talepleri için:</p>
-  <br>
-  <a href="mailto:info@moveport.net" class="cta">info@moveport.net</a>
+<!-- FEATURES -->
+<section id="features">
+  <div class="features-wrap">
+    <div class="feat-header">
+      <div class="tag r">Platform</div>
+      <h2 class="sh r">Teknolojik altyapı<br/>ve yetenekler</h2>
+      <p class="ss r">Modüler ve ölçeklenebilir SaaS mimarisi.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="fc r">
+        <div class="fc-icon">
+          <svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="6" r="3.5" stroke="currentColor" stroke-width="1.4"/><path d="M2 14.5c0-2.5 2.9-4.5 6.5-4.5s6.5 2 6.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <div class="fc-title">AI / ML Karar Motoru</div>
+        <div class="fc-desc">Görev, HR ve performans verilerini analiz ederek gerçek zamanlı akıllı kararlar üretir.</div>
+      </div>
+      <div class="fc r">
+        <div class="fc-icon">
+          <svg viewBox="0 0 17 17" fill="none"><rect x="2" y="3.5" width="13" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M2 7.5h13" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 10.5h2M9.5 10.5h2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <div class="fc-title">Otomatik Vardiya Planlaması</div>
+        <div class="fc-desc">Öğrenen bir motor. Saniyeler içinde hatasız vardiya planları oluşturur.</div>
+      </div>
+      <div class="fc r">
+        <div class="fc-icon">
+          <svg viewBox="0 0 17 17" fill="none"><path d="M2 12.5l3.5-4.5 2.5 3 3-4 4 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="13.5" cy="4" r="2" stroke="currentColor" stroke-width="1.4"/></svg>
+        </div>
+        <div class="fc-title">Performans & Yorgunluk Analizi</div>
+        <div class="fc-desc">Çalışan bazlı izleme ve yorgunluk modellemesiyle iş yükünü dengeler.</div>
+      </div>
+      <div class="fc r">
+        <div class="fc-icon">
+          <svg viewBox="0 0 17 17" fill="none"><circle cx="3.5" cy="8.5" r="2" stroke="currentColor" stroke-width="1.4"/><circle cx="13.5" cy="4" r="2" stroke="currentColor" stroke-width="1.4"/><circle cx="13.5" cy="13" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 8L11.5 5M5.5 9L11.5 12" stroke="currentColor" stroke-width="1.4"/></svg>
+        </div>
+        <div class="fc-title">HRM / ERP Entegrasyonu</div>
+        <div class="fc-desc">Mevcut sistemlerinizle sorunsuz entegre. Veri silolarını ortadan kaldırır.</div>
+      </div>
+      <div class="fc r">
+        <div class="fc-icon">
+          <svg viewBox="0 0 17 17" fill="none"><path d="M8.5 2.5C5.5 2.5 3 5 3 8.5s2.5 6 5.5 6 5.5-2.5 5.5-6-2.5-6-5.5-6z" stroke="currentColor" stroke-width="1.4"/><path d="M3 8.5h11M8.5 2.5c-1.5 1.5-2.5 3.7-2.5 6s1 4.5 2.5 6M8.5 2.5c1.5 1.5 2.5 3.7 2.5 6s-1 4.5-2.5 6" stroke="currentColor" stroke-width="1.4"/></svg>
+        </div>
+        <div class="fc-title">Bulut Tabanlı SaaS</div>
+        <div class="fc-desc">Güvenli, ölçeklenebilir ve her cihazdan erişilebilir altyapı.</div>
+      </div>
+      <div class="fc r">
+        <div class="fc-icon">
+          <svg viewBox="0 0 17 17" fill="none"><rect x="2" y="2" width="5.5" height="5.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><rect x="9.5" y="2" width="5.5" height="5.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><rect x="2" y="9.5" width="5.5" height="5.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 12.25h5.5M12.25 9.5v5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <div class="fc-title">Modüler Yapı</div>
+        <div class="fc-desc">İhtiyaca göre büyüyen, kurumunuzun ölçeğine uyum sağlayan esnek mimari.</div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<div class="footer">
-  © 2026 Moveport | Enterprise Workforce Intelligence
-</div>
+<!-- IMPACT -->
+<section class="impact" id="impact">
+  <div class="impact-wrap">
+    <div class="tag r">Ölçülebilir Etki</div>
+    <h2 class="sh r">Rakamlarla<br/>Moveport farkı</h2>
+    <p class="ss r">Pilot uygulamalar sonrasında beklenen operasyonel iyileşmeler.</p>
+    <div class="metrics">
+      <div class="metric r">
+        <div class="metric-n">%15–30</div>
+        <div class="metric-l">Verimlilik artışı hedefi</div>
+      </div>
+      <div class="metric r">
+        <div class="metric-n">%20</div>
+        <div class="metric-l">Fazla mesai maliyet azalması</div>
+      </div>
+      <div class="metric r">
+        <div class="metric-n">%20–40</div>
+        <div class="metric-l">Planlama hataları iyileşmesi</div>
+      </div>
+    </div>
+    <div class="extras r">
+      <span class="extra-tag">Görev planlama hatalarında düşüş</span>
+      <span class="extra-tag">Gerçek zamanlı karar desteği</span>
+      <span class="extra-tag">Çalışan yorgunluğu optimizasyonu</span>
+      <span class="extra-tag">İş yükü dengeleme</span>
+    </div>
+  </div>
+</section>
 
+<!-- MARKETS -->
+<section id="markets">
+  <div class="markets-wrap">
+    <div>
+      <div class="tag r">Hedef Pazar</div>
+      <h2 class="sh r">Türkiye'den<br/>EMEA'ya büyüme</h2>
+      <p class="ss r">Türkiye odaklı strateji, MENA ve EMEA'ya ölçeklenir.</p>
+      <div class="bars">
+        <div class="bar-row r">
+          <div class="bar-head"><span class="bar-lbl">Türkiye</span><span class="bar-pct">65.7%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:65.7%"></div></div>
+        </div>
+        <div class="bar-row r">
+          <div class="bar-head"><span class="bar-lbl">MENA</span><span class="bar-pct">22.9%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:22.9%"></div></div>
+        </div>
+        <div class="bar-row r">
+          <div class="bar-head"><span class="bar-lbl">EMEA</span><span class="bar-pct">11.4%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:11.4%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="seg-cards">
+        <div class="seg r">
+          <div class="seg-t">Operasyon & Lojistik</div>
+          <div class="seg-d">Vardiyalı, görev bazlı, yüksek operasyonel verimlilik ihtiyacı olan işletmeler.</div>
+        </div>
+        <div class="seg r">
+          <div class="seg-t">Orta & Büyük Ölçekli Kurumlar</div>
+          <div class="seg-d">100+ çalışanlı, çok lokasyonlu, dijitalleşme ihtiyacı bulunan organizasyonlar.</div>
+        </div>
+        <div class="seg r">
+          <div class="seg-t">Hızlı Büyüyen Şirketler</div>
+          <div class="seg-d">Bölgesel genişleme hedefli, süreçlerini standartlaştırmak isteyen firmalar.</div>
+        </div>
+        <div class="seg r">
+          <div class="seg-t">Dijital Dönüşüme Açık Yapılar</div>
+          <div class="seg-d">HRM/ERP entegrasyonu ve veri odaklı karar mekanizmalarına sahip kurumlar.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap" id="roadmap">
+  <div class="roadmap-wrap">
+    <div class="tag r">Yol Haritası</div>
+    <h2 class="sh r">6 ayda MVP'den<br/>ticarileşmeye</h2>
+    <p class="ss r">Odaklı geliştirme süreciyle B2B pazara hızlı giriş.</p>
+    <div class="tl">
+      <div class="tl-step r"><div class="tl-dot"></div><div class="tl-mo">1. Ay</div><div class="tl-t">Platform Mimarisi</div><div class="tl-d">Veri modeli ve sistem tasarımı</div></div>
+      <div class="tl-step r"><div class="tl-dot"></div><div class="tl-mo">2. Ay</div><div class="tl-t">Veri Altyapısı</div><div class="tl-d">HRM/ERP entegrasyonları</div></div>
+      <div class="tl-step r"><div class="tl-dot"></div><div class="tl-mo">3. Ay</div><div class="tl-t">AI Motor</div><div class="tl-d">Optimizasyon algoritmaları</div></div>
+      <div class="tl-step r"><div class="tl-dot"></div><div class="tl-mo">4. Ay</div><div class="tl-t">Arayüzler</div><div class="tl-d">Yönetici paneli ve kullanıcı UI</div></div>
+      <div class="tl-step r"><div class="tl-dot"></div><div class="tl-mo">5. Ay</div><div class="tl-t">Pilot Testler</div><div class="tl-d">MVP ve gerçek ortam senaryoları</div></div>
+      <div class="tl-step r"><div class="tl-dot"></div><div class="tl-mo">6. Ay</div><div class="tl-t">Ticarileşme</div><div class="tl-d">B2B pazara açılım hazırlıkları</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-sec" id="contact">
+  <div class="tag r">İletişim</div>
+  <h2 class="sh r">İş gücünüzü geleceğe<br/>taşımaya hazır mısınız?</h2>
+  <p class="ss r">Moveport hakkında daha fazla bilgi almak için bize ulaşın.</p>
+  <a href="mailto:info@moveport.io" class="contact-link r">
+    info@moveport.io
+    <svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">
+    <div class="foot-mark">
+      <svg viewBox="0 0 13 13" fill="none"><path d="M1.5 9L4.5 4L6.5 7L8.5 5L11.5 9" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <span class="foot-name">MOVEPORT</span>
+  </div>
+  <span class="foot-copy">© 2025 Moveport. Tüm hakları saklıdır.</span>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('on'), i * 50);
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -28px 0px' });
+  document.querySelectorAll('.r').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>
